@@ -1,8 +1,8 @@
 ---
-- name: Install Terraform
+- name: Install Grafana
   hosts: localhost
-  become: true
-
+  connection: local
+  become: yes
 
   tasks:
     - name: Add hashicorp apt Key  
