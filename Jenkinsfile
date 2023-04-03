@@ -4,6 +4,7 @@ pipeline {
         stage("INIT") {
             steps {
                 sh 'ls'
+                sh 'terraform --version'
             }
         }
         stage("PLAN") {
