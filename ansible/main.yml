@@ -109,7 +109,7 @@
     ansible.builtin.apt:
       name:
         - wget
-        - java-1.8.0-openjdk
+
  
   - name: Download jenkins.repo
     ansible.builtin.get_url:
