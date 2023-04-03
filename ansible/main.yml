@@ -105,44 +105,17 @@
       state: started
       enabled: yes
 
-  - name: Install yum
-    ansible.builtin.apt:
-      name:
-        - wget
+  - name: ensure the jenkins apt repository key is installed
+    apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
 
- 
-  - name: Download jenkins.repo
-    ansible.builtin.get_url:
-      url: http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
-      dest: /etc/yum.repos.d/jenkins.repo
+  - name: ensure the repository is configured
+    apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
 
-  - name: Import Jenkins Key
-    ansible.builtin.rpm_key:
-      state: present
-      key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+  - name: ensure jenkins is installed
+    apt: name=jenkins update_cache=yes
 
-  - name: Install Jenkins
-    ansible.builtin.apt:
-      name: jenkins
-      state: present
-
-  - name: Start & Enable Jenkins
-    ansible.builtin.systemd:
-      name: jenkins
-      state: started
-      enabled: true
-
-  - name: Sleep for 30 seconds and continue with play
-    wait_for: timeout=30
-
-  - name: Get init password Jenkins
-    shell: cat /var/lib/jenkins/secrets/initialAdminPassword
-    changed_when: false
-    register: result
-
-  - name: Print init password Jenkins
-    debug:
-      var: result.stdout
+  - name: ensure jenkins is running
+    service: name=jenkins state=started
 
 
   - name: Import docker and docker compose playbook
