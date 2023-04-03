@@ -1,0 +1,22 @@
+---
+- name: Install Terraform
+  hosts: localhost
+  become: true
+
+
+  tasks:
+    - name: Add hashicorp apt Key  
+      ansible.builtin.apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
+        state: present
+
+    - name: Add repository
+      ansible.builtin.apt_repository:
+        url: deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main
+        filename: 
+        state: present
+
+    - name: Update cache and install terraform
+      ansible.builtin.apt:
+        name: terraform
+        state: present
