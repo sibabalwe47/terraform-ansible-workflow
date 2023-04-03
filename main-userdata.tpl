@@ -7,7 +7,7 @@ ansible --version
 sudo apt install git
 git --version
 cd /home/ubuntu
-sudo git clone https://github.com/sibabalwe47/ansible-playbooks.git
+sudo git clone https://github.com/sibabalwe47/terraform-ansible-workflow.git
 
 # Install grafana and prometheus
 sudo ansible-playbook /home/ubuntu/ansible-playbooks/main.yml \
