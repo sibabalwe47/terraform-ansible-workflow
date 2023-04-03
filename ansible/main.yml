@@ -105,34 +105,20 @@
       state: started
       enabled: yes
 
-  - name: Download Long Term Jenkins release
-    ansible.builtin.get_url:
-      url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
-      dest: /etc/yum.repos.d/jenkins.repo
+  - name: Add APT key
+    apt_key:
+      url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
 
-  - name: Import jenkins key from url
-    ansible.builtin.apt_key:
-      state: present
-      key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-
-  - name: yum update
-    ansible.builtin.apt:
-      name: '*'
-      state: latest
-
-  - name: Install java
-    ansible.builtin.apt:
-      name: java-11-openjdk-devel
-      state: present
-
-  - name: Install jenkins
-    ansible.builtin.apt:
+  - name: Copy jenkins.list to /etc/apt/sources.list.d/jenkins.list
+    copy:
+      src: jenkins.list
+      dest: /etc/apt/sources.list.d/jenkins.list
+      
+  - name: Install Jenkins
+    apt: 
       name: jenkins
-      state: latest
-
-  - name: daemon-reload to pick up config changes
-    ansible.builtin.systemd:
-      daemon_reload: yes
+      update_cache: yes
+      install_recommends: no
 
   - name: Start jenkins
     ansible.builtin.systemd:
