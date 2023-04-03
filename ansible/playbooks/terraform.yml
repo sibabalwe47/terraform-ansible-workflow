@@ -6,9 +6,9 @@
 
   tasks:
     - name: Add hashicorp apt Key  
-      ansible.builtin.apt_key:
+      ansible.builtin.get_url:
         url: https://apt.releases.hashicorp.com/gpg
-        state: present
+        dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
     - name: Add repository
       ansible.builtin.apt_repository:
