@@ -17,4 +17,4 @@ crash.log
 *.retry
 
 # Infracost
-.infracost
+/.infracost/
