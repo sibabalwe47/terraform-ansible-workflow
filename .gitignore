@@ -17,4 +17,4 @@ crash.log
 *.retry
 
 # Infracost
-**/.infracost/terraform_modules
+**/.infracost/terraform_modules/manifest.json
