@@ -106,6 +106,6 @@
       enabled: yes
 
   - name: Import docker and docker compose playbook
-    ansible.builtin.import_module:
+    ansible.builtin.import_tasks:
       file: /home/ubuntu/terraform-ansible-workflow/ansible/playbooks/docker.yml
 
