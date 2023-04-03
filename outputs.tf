@@ -12,6 +12,6 @@ output "grafana_addresses" {
 }
 
 output "jenkins_addresses" {
-  value = [for main in aws_instance.mtc_main : "http://${main.public_ip}:8080"]
+  value = [for main in aws_instance.mtc_main : "http://${main.public_ip}:8100"]
 }
 

@@ -1,5 +1,5 @@
 ---
-- name: Install Grafana
+- name: Install Terraform
   hosts: localhost
   connection: local
   become: yes
