@@ -1,53 +1,49 @@
----
-- name: Install Docker
-  become: yes
-  
-  tasks:
-      - name: Install aptitude
-        apt:
-          name: aptitude
-          state: latest
-          update_cache: true
 
-      - name: Install required system packages
-        apt:
-          pkg:
-            - apt-transport-https
-            - ca-certificates
-            - curl
-            - software-properties-common
-            - python3-pip
-            - virtualenv
-            - python3-setuptools
-          state: latest
-          update_cache: true
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: latest
+    update_cache: true
 
-      - name: Add Docker GPG apt Key
-        apt_key:
-          url: https://download.docker.com/linux/ubuntu/gpg
-          state: present
+- name: Install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+    state: latest
+    update_cache: true
 
-      - name: Add Docker Repository
-        apt_repository:
-          repo: deb https://download.docker.com/linux/ubuntu focal stable
-          state: present
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
 
-      - name: Update apt and install docker-ce
-        apt:
-          name: docker-ce
-          state: latest
-          update_cache: true
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
 
-      - name: Install Docker Module for Python
-        pip:
-          name: docker
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
 
-      - name: Install docker-compose from official github repo
-        get_url:
-          url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
-          dest: /usr/local/bin/docker-compose
-          mode: 'u+x,g+x'
+- name: Install Docker Module for Python
+  pip:
+    name: docker
 
-      - name: Create jenkins container from jenkins image 
-        ansible.builtin.command:
-          cmd: docker-compose -f /home/ubuntu/ansible-playbooks/docker-compose.yml up -d
+- name: Install docker-compose from official github repo
+  get_url:
+    url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 'u+x,g+x'
+
+- name: Create jenkins container from jenkins image 
+  ansible.builtin.command:
+    cmd: docker-compose -f /home/ubuntu/ansible-playbooks/docker-compose.yml up -d
