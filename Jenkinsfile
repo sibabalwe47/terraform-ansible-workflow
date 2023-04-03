@@ -10,6 +10,7 @@ pipeline {
         stage("PLAN") {
             steps {
                 sh 'pwd'
+                sh 'terraform --version'
             }
         }
     }
