@@ -106,11 +106,11 @@
 
   - name: download apt key
     ansible.builtin.apt_key:
-      url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+      url: https://pkg.jenkins.io/debian/jenkins.io.key
       state: present
   - name: Add Jenkins repo to sources.list
     ansible.builtin.apt_repository:
-      repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+      repo: 'deb https://pkg.jenkins.io/debian binary/' #>> /etc/apt/sources.list
       state: present
       filename: jenkins
   - name: Update apt cache and install jenkins
