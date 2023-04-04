@@ -103,26 +103,20 @@
       name: prometheus
       state: started
       enabled: yes
-
-  - name: ensure the jenkins apt repository key is installed
-    ansible.builtin.apt_key: 
-      url: https://pkg.jenkins.io/debian-stable/jenkins.io.key 
+      
+  - name: download apt key
+    ansible.builtin.apt_key:
+      url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
       state: present
-
-  - name: ensure the repository is configured
-    ansible.builtin.apt_repository: 
-      repo: 'deb https://pkg.jenkins.io/debian-stable binary/' 
+  - name: Add Jenkins repo to sources.list
+    ansible.builtin.apt_repository:
+      repo: deb https://pkg.jenkins.io/debian-stable binary/
       state: present
-
-  - name: ensure jenkins is installed
-    ansible.builtin.apt: 
-      name: jenkins 
+      filename: jenkins
+  - name: Update apt cache and install jenkins
+    apt:
+      name: jenkins
       update_cache: yes
-
-  - name: ensure jenkins is running
-    ansible.builtin.systemd: 
-      name: jenkins 
-      state: started
 
 
   - name: Import docker and docker compose playbook
