@@ -8,7 +8,7 @@ pipeline {
         stage("INIT") {
             steps {
                 sh 'ls'
-                sh 'terraform plan -no-color'
+                sh 'terraform init -no-color'
             }
         }
         stage("PLAN") {
