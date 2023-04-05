@@ -1,11 +1,25 @@
 #!/bin/bash
-sudo apt update
+sudo yum upgrade -y
 
-sudo apt install software-properties-common
+sudo amazon-linux-extras install epel -y
 
-sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo yum install ansible -y
 
-sudo apt install -y wget unzip ansible curl git
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+sudo yum upgrade -y
+
+sudo amazon-linux-extras install java-openjdk11 -y
+
+sudo yum install jenkins -y
+
+sudo systemctl enable jenkins
+
+sudo systemctl start jenkins
+
+sudo yum install -y wget unzip ansible curl git
 
 sudo wget --quiet https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip \
     && unzip terraform_0.11.3_linux_amd64.zip \
@@ -20,9 +34,11 @@ sudo curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scr
 
 sudo curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
 
-cd /home/ubuntu
+mkdir /home/ubuntu
+
+cd /home/ansible
 
 sudo git clone https://github.com/sibabalwe47/terraform-ansible-workflow.git
 
 # Install grafana and prometheus
-sudo ansible-playbook /home/ubuntu/terraform-ansible-workflow/ansible/main.yml
+sudo ansible-playbook /home/ansible/terraform-ansible-workflow/ansible/main.yml

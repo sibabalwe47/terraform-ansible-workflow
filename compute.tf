@@ -1,11 +1,10 @@
 data "aws_ami" "server_ami" {
+  owners      = ["amazon"]
   most_recent = true
-
-  owners = ["099720109477"]
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
   }
 }
 
@@ -14,9 +13,43 @@ resource "random_id" "mtc_node_id" {
 }
 
 resource "aws_key_pair" "mtc_auth" {
-  key_name   = var.key_name
+  key_name   = "${var.key_name}-${random_id.mtc_node_id.hex}"
   public_key = file(var.public_key_path)
 }
+
+# resource "aws_instance" "mtc_main" {
+#   count         = var.instance_count
+#   subnet_id     = aws_subnet.mtc_public_subnet[count.index].id
+#   ami           = "ami-00c39f71452c08778"
+#   instance_type = var.instance_type
+#   root_block_device {
+#     volume_size = var.main_vol_size
+#   }
+#   user_data = <<-EOF
+#     #!/bin/bash
+#     sudo yum update -y
+#     sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+#     sudo rpm — import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+#     sudo yum upgrade -y
+#     sudo amazon-linux-extras install java-openjdk11 -y
+#     sudo yum install jenkins -y
+#     sudo systemctl enable jenkins
+#     sudo systemctl start jenkins
+#   EOF
+
+#   lifecycle {
+#     create_before_destroy = true
+#   }
+
+#   vpc_security_group_ids = [aws_security_group.mtc_sg.id]
+
+#   tags = {
+#     "Name" = "mtc_main-${random_id.mtc_node_id.dec}"
+#   }
+
+
+
+# }
 
 resource "aws_instance" "mtc_main" {
   count                  = var.instance_count
@@ -36,10 +69,6 @@ resource "aws_instance" "mtc_main" {
   lifecycle {
     create_before_destroy = true
   }
-
-  # provisioner "local-exec" {
-  #   command = "aws ec2 wait instance-status-ok --instance-ids ${self.id}"
-  # }
 
   provisioner "local-exec" {
     when    = destroy
