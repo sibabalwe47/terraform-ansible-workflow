@@ -1,13 +1,10 @@
 
-    - name: Install aptitude
-      ansible.builtin.yum:
-        name: aptitude
-        state: latest
-        update_cache: true
-
     - name: Install required system packages
       ansible.builtin.yum:
-        pkg:
+        name: "{{ item }}"
+        state: latest
+        update_cache: true
+        loop:
           - apt-transport-https
           - ca-certificates
           - curl
@@ -15,8 +12,7 @@
           - python3-pip
           - virtualenv
           - python3-setuptools
-        state: latest
-        update_cache: true
+
 
     - name: Add Docker GPG apt Key
       ansible.builtin.apt_key:
