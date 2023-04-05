@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage("INIT") {
             steps {
-                echo 'env'
+                sh 'env'
                 
             }
         }
