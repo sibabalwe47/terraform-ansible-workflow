@@ -8,6 +8,8 @@ pipeline {
         stage("INIT") {
             steps {
                 echo 'Initialise terraform and set credentials...'
+                sh 'export AWS_ACCESS_KEY_ID=$ACCESS_KEY_ID'
+                sh 'export AWS_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY'
                 sh 'terraform init -no-color'
             }
         }
