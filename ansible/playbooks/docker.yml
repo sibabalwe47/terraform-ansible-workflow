@@ -1,45 +1,62 @@
+    - name: Create docker group
+      ansible.builtin.group:
+        name: docker
+        state: present
 
-    - name: Install required system packages
+    - name: Create Prom User
+      ansible.builtin.user:
+        name: docker
+        group: docker
+        shell: /sbin/nologin
+    
+    
+    - name: Install docker
       ansible.builtin.yum:
-        name: apt-transport-https
-        state: latest
+        name: docker
+        state: present
         update_cache: true
 
-    - name: Install required system packages
-      ansible.builtin.yum:
-        name: ca-certificates
-        state: latest
-        update_cache: true
+    - name: Ensure Grafana is started and enabled
+      ansible.builtin.systemd:
+        name: docker
+        enabled: true
+        state: started
 
-    - name: Install required system packages
-      ansible.builtin.yum:
-        name: curl
-        state: latest
-        update_cache: true
+    # - name: Install required system packages
+    #   ansible.builtin.yum:
+    #     name: ca-certificates
+    #     state: latest
+    #     update_cache: true
 
-    - name: Install required system packages
-      ansible.builtin.yum:
-        name: software-properties-common
-        state: latest
-        update_cache: true
+    # - name: Install required system packages
+    #   ansible.builtin.yum:
+    #     name: curl
+    #     state: latest
+    #     update_cache: true
 
-    - name: Install required system packages
-      ansible.builtin.yum:
-        name: python3-pip
-        state: latest
-        update_cache: true
+    # - name: Install required system packages
+    #   ansible.builtin.yum:
+    #     name: software-properties-common
+    #     state: latest
+    #     update_cache: true
 
-    - name: Install required system packages
-      ansible.builtin.yum:
-        name: virtualenv
-        state: latest
-        update_cache: true
+    # - name: Install required system packages
+    #   ansible.builtin.yum:
+    #     name: python3-pip
+    #     state: latest
+    #     update_cache: true
 
-    - name: Install required system packages
-      ansible.builtin.yum:
-        name: python3-setuptools
-        state: latest
-        update_cache: true
+    # - name: Install required system packages
+    #   ansible.builtin.yum:
+    #     name: virtualenv
+    #     state: latest
+    #     update_cache: true
+
+    # - name: Install required system packages
+    #   ansible.builtin.yum:
+    #     name: python3-setuptools
+    #     state: latest
+    #     update_cache: true
         # loop:
         #   - apt-transport-https
         #   - ca-certificates
