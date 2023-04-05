@@ -12,10 +12,10 @@ resource "random_id" "mtc_node_id" {
   byte_length = 2
 }
 
-resource "aws_key_pair" "mtc_auth" {
-  key_name   = "${var.key_name}-${random_id.mtc_node_id.hex}"
-  public_key = file(var.public_key_path)
-}
+# resource "aws_key_pair" "mtc_auth" {
+#   key_name   = "${var.key_name}-${random_id.mtc_node_id.hex}"
+#   public_key = file(var.public_key_path)
+# }
 
 # resource "aws_instance" "mtc_main" {
 #   count         = var.instance_count
