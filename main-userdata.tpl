@@ -34,7 +34,7 @@ sudo curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scr
 
 sudo curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
 
-mkdir /home/ubuntu
+mkdir /home/ansible
 
 cd /home/ansible
 

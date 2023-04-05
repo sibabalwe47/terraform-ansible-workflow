@@ -52,10 +52,10 @@ resource "random_id" "mtc_node_id" {
 # }
 
 resource "aws_instance" "mtc_main" {
-  count                  = var.instance_count
-  instance_type          = var.instance_type
-  ami                    = data.aws_ami.server_ami.id
-  key_name               = aws_key_pair.mtc_auth.key_name
+  count         = var.instance_count
+  instance_type = var.instance_type
+  ami           = data.aws_ami.server_ami.id
+  #key_name               = aws_key_pair.mtc_auth.key_name
   vpc_security_group_ids = [aws_security_group.mtc_sg.id]
   subnet_id              = aws_subnet.mtc_public_subnet[count.index].id
   user_data = templatefile("./main-userdata.tpl", {
