@@ -21,10 +21,10 @@ sudo systemctl start jenkins
 
 sudo yum install -y wget unzip ansible curl git
 
-sudo wget --quiet https://releases.hashicorp.com/terraform/0.11.3/terraform_0.11.3_linux_amd64.zip \
-    && unzip terraform_0.11.3_linux_amd64.zip \
+sudo wget --quiet https://releases.hashicorp.com/terraform/1.4.4/terraform_1.4.4_linux_amd64.zip \
+    && unzip terraform_1.4.4_linux_amd64.zip \
     && mv terraform /usr/bin \
-    && rm terraform_0.11.3_linux_amd64.zip
+    && rm terraform_1.4.4_linux_amd64.zip
 
 sudo wget -q -O tfsec https://github.com/aquasecurity/tfsec/releases/download/v0.58.6/tfsec-linux-amd64  \
     && chmod +x ./tfsec \
