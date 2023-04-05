@@ -10,7 +10,7 @@
   tasks:
     - name: Import docker and docker compose playbook
       ansible.builtin.import_tasks:
-        file: /home/ubuntu/terraform-ansible-workflow/ansible/playbooks/docker.yml
+        file: /home/ansible/terraform-ansible-workflow/ansible/playbooks/docker.yml
   # - name: Download apt key
   #   ansible.builtin.apt_key:
   #     url: https://packages.grafana.com/gpg.key
