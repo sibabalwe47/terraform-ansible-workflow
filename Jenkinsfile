@@ -15,7 +15,7 @@ pipeline {
         }
         stage("PLAN") {
             steps {
-                sh 'terraform plan -auto-approve -no-color'
+                sh 'terraform plan -no-color'
             }
         }
     }
