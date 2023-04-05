@@ -7,16 +7,14 @@ pipeline {
     stages {
         stage("INIT") {
             steps {
-                sh '$AWS_SECRET_ACCESS_KEY'
-                sh '$AWS_ACCESS_KEY_ID'
-                sh '$AWS_DEFAULT_REGION'
-                
+                echo 'Initialise terraform and set credentials...'
+                sh 'terraform init -no-color'
             }
         }
-        // stage("PLAN") {
-        //     steps {
-        //         sh 'terraform apply -auto-approve -no-color'
-        //     }
-        // }
+        stage("PLAN") {
+            steps {
+                sh 'terraform plan -auto-approve -no-color'
+            }
+        }
     }
 }
