@@ -9,6 +9,7 @@ pipeline {
             steps {
                 sh 'ls'
                 sh 'terraform init -no-color'
+                echo TF_CLI_CONFIG_FILE
             }
         }
         stage("PLAN") {
