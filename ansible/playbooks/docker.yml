@@ -1,17 +1,53 @@
 
     - name: Install required system packages
       ansible.builtin.yum:
-        name: "{{ item }}"
+        name: apt-transport-https
         state: latest
         update_cache: true
-        loop:
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - software-properties-common
-          - python3-pip
-          - virtualenv
-          - python3-setuptools
+
+    - name: Install required system packages
+      ansible.builtin.yum:
+        name: ca-certificates
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      ansible.builtin.yum:
+        name: curl
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      ansible.builtin.yum:
+        name: software-properties-common
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      ansible.builtin.yum:
+        name: python3-pip
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      ansible.builtin.yum:
+        name: virtualenv
+        state: latest
+        update_cache: true
+
+    - name: Install required system packages
+      ansible.builtin.yum:
+        name: python3-setuptools
+        state: latest
+        update_cache: true
+        # loop:
+        #   - apt-transport-https
+        #   - ca-certificates
+        #   - curl
+        #   - software-properties-common
+        #   - python3-pip
+        #   - virtualenv
+        #   - python3-setuptools
 
 
     - name: Add Docker GPG apt Key
