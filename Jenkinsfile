@@ -7,9 +7,7 @@ pipeline {
     stages {
         stage("INIT") {
             steps {
-                echo '$AWS_DEFAULT_REGION'
-                echo '$AWS_SECRET_ACCESS_KEY'
-                echo '$AWS_ACCESS_KEY_ID'
+                echo 'env'
                 
             }
         }
