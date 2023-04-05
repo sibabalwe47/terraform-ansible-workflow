@@ -1,7 +1,7 @@
 {
   "credentials": {
     "app.terraform.io": {
-      "token": "iHZqRGfuRNCcqQ.atlasv1.mLajwrh2IHxfvGfTspzyniUt5npFi6rGBeV6RDaVxaOJRLpzfnF1mtUUpiLptphThQE"
+      "token": "yTOiPz3KBzmoKg.atlasv1.ap8qnDznYa5MOawteU1murz6IOi0B5HqG5ngmjJAtByBHNrJrOqaOjYvCPfURnZUg2E"
     }
   }
 }
