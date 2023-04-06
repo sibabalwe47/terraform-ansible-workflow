@@ -1,9 +1,9 @@
 terraform {
-  # cloud {
-  #   organization = "taj-20230326"
+  cloud {
+    organization = "taj-20230326"
 
-  #   workspaces {
-  #     name = "taj-workspace"
-  #   }
-  # }
+    workspaces {
+      name = "taj-workspace"
+    }
+  }
 }
